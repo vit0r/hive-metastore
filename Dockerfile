@@ -9,12 +9,5 @@ RUN mvn dependency:get -Dartifact=com.amazonaws:aws-java-sdk-s3:1.12.788
 RUN mvn dependency:get -Dartifact=com.amazonaws:aws-java-sdk:1.12.788
 
 FROM apache/hive:4.0.1
-COPY --from=maven /root/.m2/repository/org/postgresql/postgresql/42.7.7/postgresql-42.7.7.jar $HIVE_HOME/lib/postgres.jar
-COPY --from=maven /root/.m2/repository/com/mysql/mysql-connector-j/9.4.0/mysql-connector-j-9.4.0.jar $HIVE_HOME/lib/mariadb.jar
-COPY --from=maven /root/.m2/repository/org/apache/hadoop/hadoop-aws/3.4.1/hadoop-aws-3.4.1.jar $HIVE_HOME/lib/hadoop-aws.jar
-COPY --from=maven /root/.m2/repository/org/apache/hadoop/hadoop-common/3.4.1/hadoop-common-3.4.1.jar $HIVE_HOME/lib/hadoop-common.jar
-COPY --from=maven /root/.m2/repository/com/amazonaws/aws-java-sdk/1.12.788/aws-java-sdk-1.12.788.jar $HIVE_HOME/lib/aws-java-sdk.jar
-COPY --from=maven /root/.m2/repository/com/amazonaws/aws-java-sdk-core/1.12.788/aws-java-sdk-core-1.12.788.jar $HIVE_HOME/lib/aws-java-sdk-core.jar
-COPY --from=maven /root/.m2/repository/com/amazonaws/aws-java-sdk-s3/1.12.788/aws-java-sdk-s3-1.12.788.jar $HIVE_HOME/lib/aws-java-sdk-s3.jar
-COPY --from=maven /root/.m2/repository/com/amazonaws/aws-java-sdk/1.12.788/aws-java-sdk-1.12.788.jar $HIVE_HOME/lib/aws-java-sdk.jar
+COPY --from=maven /root/.m2/repository/ $HIVE_HOME/lib/repository
 RUN rm -f /opt/hadoop/share/hadoop/common/lib/slf4j-reload4j-1.7.36.jar
