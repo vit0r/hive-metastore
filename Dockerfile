@@ -5,5 +5,6 @@ RUN mvn dependency:get -Dartifact=org.apache.hadoop:hadoop-aws:3.4.1
 RUN mvn dependency:get -Dartifact=org.apache.hadoop:hadoop-common:3.4.1
 
 FROM apache/hive:4.0.1
-COPY --from=maven /root/.m2/repository/ $HIVE_HOME/lib/
+ENV HOME=/home/hive
+COPY --from=maven /root/.m2/ $HOME/.m2
 RUN rm -f /opt/hadoop/share/hadoop/common/lib/slf4j-reload4j-1.7.36.jar
