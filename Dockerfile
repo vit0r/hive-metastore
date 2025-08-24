@@ -6,5 +6,7 @@ RUN mvn dependency:get -Dartifact=org.apache.hadoop:hadoop-common:3.4.1
 
 FROM apache/hive:4.0.1
 ENV HOME=/home/hive
+COPY --from=maven /root/.m2/repository/org/postgresql/postgresql/42.7.7/postgresql-42.7.7.jar $HIVE_HOME/lib/postgres.jar
+COPY --from=maven /root/.m2/repository/com/mysql/mysql-connector-j/9.4.0/mysql-connector-j-9.4.0.jar $HIVE_HOME/lib/mariadb.jar
 COPY --from=maven /root/.m2/ $HOME/.m2
 RUN rm -f /opt/hadoop/share/hadoop/common/lib/slf4j-reload4j-1.7.36.jar
