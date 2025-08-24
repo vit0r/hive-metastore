@@ -9,6 +9,10 @@ RUN mvn dependency:get -Dartifact=com.amazonaws:aws-java-sdk-s3:1.12.788
 RUN mvn dependency:get -Dartifact=com.amazonaws:aws-java-sdk:1.12.788
 
 FROM apache/hive:4.0.1
+USER root
 RUN mkdir -p $HIVE_HOME/jars/
 COPY --from=maven /root/.m2/repository $HIVE_HOME/jars
+RUN find jars/ -name "*.jar" -print0 | xargs -0 cp -t lib
+RUN rm -rf $HIVE_HOME/jars
 RUN rm -f /opt/hadoop/share/hadoop/common/lib/slf4j-reload4j-1.7.36.jar
+USER hive
