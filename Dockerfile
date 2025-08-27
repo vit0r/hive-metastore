@@ -10,6 +10,7 @@ RUN mvn dependency:get -Dartifact=com.amazonaws:aws-java-sdk:1.12.788
 RUN mvn dependency:get -Dartifact=com.amazonaws:aws-java-sdk-core:1.12.788
 RUN mvn dependency:get -Dartifact=com.amazonaws:aws-java-sdk-s3:1.12.788
 RUN mvn dependency:get -Dartifact=com.amazonaws:aws-java-sdk:1.12.788
+RUN mvn dependency:get -Dartifact=commons-io:commons-io:2.20.0
 
 FROM apache/hive:4.0.1
 USER root
